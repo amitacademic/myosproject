@@ -1,1 +1,3 @@
 hi my name is Amit and this is the new file of the github and it is my new project regarding the os
+
+My friend is deepak
