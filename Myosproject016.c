@@ -27,6 +27,7 @@ int Pseq[10];
 //temperay store for thread exec
 
 int amount=100;
+int hold[n][m];
 
 int counter=0;
 int Tret;
@@ -279,7 +280,7 @@ void* BankerThreadFun()
 {
 
 		
-	 unsigned long i = 0;
+	
 	
 
 
@@ -298,6 +299,9 @@ void* BankerThreadFun()
 	
     	counter += 1;
     	printf("\n Job %d has started\n", ps);
+	
+	amount=amount+100;
+	printf("\n the amount is %d ",amount);
 	/*
 	for(int i=0;i<n;i++)
 	{
