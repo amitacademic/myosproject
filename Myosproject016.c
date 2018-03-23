@@ -25,6 +25,9 @@ int F[10],W[1][10];
 int Pseq[10];
 
 //temperay store for thread exec
+
+int amount=100;
+
 int counter=0;
 int Tret;
 int tA[10][10];
