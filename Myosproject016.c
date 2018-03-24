@@ -43,6 +43,12 @@ pthread_mutex_t lock;
 void Mprint(int x[][10],int n,int m)
 {
 	int i,j;
+	printf("\n");
+	for(i=0;i<m;i++)
+	{
+			printf("R%d\t",i);
+
+	}
 	for(i=0;i<n;i++)
 	{
 		printf("\n");
