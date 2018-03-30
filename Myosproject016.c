@@ -46,12 +46,13 @@ void Mprint(int x[][10],int n,int m)
 	printf("\n");
 	for(i=0;i<m;i++)
 	{
-			printf("R%d\t",i);
+			printf("\tR%d",i+1);
 
 	}
+	
 	for(i=0;i<n;i++)
 	{
-		printf("\n");
+		printf("\nP%d\t",i+1); //P[i]
 		for(j=0;j<m;j++)
 		{
 			printf("%d\t",x[i][j]);
