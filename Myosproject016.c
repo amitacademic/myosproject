@@ -24,11 +24,9 @@ int n,m,pid,ch;
 int F[10],W[1][10];
 int Pseq[10];
 
-//temperay store for thread exec
-
 int amount=100;
-int hold[n][m];
 
+//temperay store for thread exec
 int counter=0;
 int Tret;
 int tA[10][10];
@@ -43,7 +41,8 @@ pthread_mutex_t lock;
 void Mprint(int x[][10],int n,int m)
 {
 	int i,j;
-	printf("\n");
+	printf("\n");	
+	
 	for(i=0;i<m;i++)
 	{
 			printf("\tR%d",i+1);
@@ -287,7 +286,7 @@ void* BankerThreadFun()
 {
 
 		
-	
+	 unsigned long i = 0;
 	
 
 
@@ -304,11 +303,51 @@ void* BankerThreadFun()
 	pthread_mutex_lock(&lock);
  
 	
+
     	counter += 1;
     	printf("\n Job %d has started\n", ps);
-	
-	amount=amount+100;
-	printf("\n the amount is %d ",amount);
+	int amountC=amount;
+	sleep(1);//checking Other process ACCESS the amount 	
+	if(counter%2==0)
+	{
+		amountC=amountC+100;
+		amount=amountC;
+		printf("\n Job %d has Increases the Amount by 100 \n", ps);
+		printf("\n Now amount is  %d  \n",amount);
+	}
+	else
+	{
+		amountC=amountC-10;
+		amount=amountC;
+		printf("\n Job %d has Decreses the Amount by 10 \n", ps);
+		printf("\n Now amount is  %d  \n",amount);
+		
+	}
+
+
+	/*
+	if(counter%2==0)
+	{
+		amount=amount+100;
+		printf("\n Job %d has Increases the Amount by 100 \n", ps);
+		printf("\n Now amount is  %d  \n",amount);
+	}
+	else
+	{
+		amount=amount-200;
+		if(amount>0)
+		{
+			printf("\n Job %d has Decreses the Amount by 200 \n", ps);
+			printf("\n NOw amount is  %d  \n",amount);
+		}
+		else
+		{
+			amount=amount+00;
+			printf("\n Job %d has want more  Amount \n", ps);
+
+		}
+	}
+	*/
 	/*
 	for(int i=0;i<n;i++)
 	{
@@ -326,6 +365,7 @@ void* BankerThreadFun()
 	printf(" update value of DC = %d",dc); 
     	printf("\n Job %d has finished\n", ps);
     	*/
+	printf("\n Job %d has Completed\n", ps);
 	pthread_mutex_unlock(&lock);
 /////////////////// //////////////////////
     
@@ -365,7 +405,7 @@ int main()
 	{
 			exit(0);
 	}
-	printf("\n DECTECTION of SAFE sequence is completed...\n NOW the Game Begin \t ");
+	printf("\n Now DECTECTION of SAFE sequence is completed...\n NOW the Game Begin \t ");
 
 	////////////////////////////////////////////////
 	
@@ -389,7 +429,7 @@ int main()
     	  //pthread_create(&Ttid[s], NULL, myThreadFun,(void*)need,(void*)max);
 	  pthread_create(&Ttid[ps], NULL, &BankerThreadFun,NULL);
 	  pthread_join(Ttid[ps],NULL);
-	  sleep(1);
+	 // sleep(1);
 	 
 	}
 
